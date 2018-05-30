@@ -1,0 +1,39 @@
+const mongoose=require('mongoose');
+var EnqueryM=mongoose.model('inqurie',{
+    name:{
+        type:String,
+        required:true,
+        minlength:1,
+        trim:true
+    },
+    mobile:{
+        type:Number,
+        required:true,
+        length:10,
+    },
+    email:{
+        type:String,
+        required:true,
+        trim:true,
+        minlength:1
+    },
+    college:{
+        type:String,
+        default:null,
+        trim:true,
+        minlength:1
+    }, 
+    courses:[
+        {
+            type:String,
+        }
+    ],
+    special_comment:{
+        type:String,
+        default:null,
+        trim:true
+    } 
+});
+module.exports={
+    EnqueryM:EnqueryM
+}
