@@ -1,0 +1,60 @@
+{ 
+    "_id" : ObjectId("5b0e6e95f0499618043e7367"), 
+    "name" : "Core_Java", 
+    "fee" : NumberInt(7000), 
+    "opted" : false
+}
+{ 
+    "_id" : ObjectId("5b0e6ea3f0499618043e7375"), 
+    "name" : "Php", 
+    "fee" : NumberInt(5000), 
+    "opted" : false
+}
+{ 
+    "_id" : ObjectId("5b0e6eb3f0499618043e737a"), 
+    "name" : "Oracle_SQL", 
+    "fee" : NumberInt(6000), 
+    "opted" : false
+}
+{ 
+    "_id" : ObjectId("5b0e6ec1f0499618043e7381"), 
+    "name" : "Bigdata_Hadoop", 
+    "fee" : NumberInt(15000), 
+    "opted" : false
+}
+{ 
+    "_id" : ObjectId("5b0e6eccf0499618043e7385"), 
+    "name" : "AWS", 
+    "fee" : NumberInt(6000), 
+    "opted" : false
+}
+{ 
+    "_id" : ObjectId("5b0e6ee0f0499618043e738d"), 
+    "name" : "AdminI", 
+    "fee" : NumberInt(7000), 
+    "opted" : false
+}
+{ 
+    "_id" : ObjectId("5b0e88c9f0499618043e7dd4"), 
+    "name" : "Advance_Java", 
+    "opted" : false, 
+    "fee" : NumberInt(8500)
+}
+{ 
+    "_id" : ObjectId("5b0e88f4f0499618043e7df3"), 
+    "name" : "AdminII", 
+    "opted" : "false", 
+    "fee" : NumberInt(7500)
+}
+{ 
+    "_id" : ObjectId("5b0e8929f0499618043e7e1b"), 
+    "name" : "Android", 
+    "opted" : "false", 
+    "fee" : NumberInt(10000)
+}
+{ 
+    "_id" : ObjectId("5b0e8955f0499618043e7e40"), 
+    "name" : "Python", 
+    "opted" : false, 
+    "fee" : NumberInt(7000)
+}

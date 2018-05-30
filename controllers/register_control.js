@@ -8,6 +8,7 @@ module.exports={
             name:req.body.name,
             mobile:req.body.mobile,
             email:req.body.email,
+            college:req.body.college,
             package_opted:req.body.package_opted,
             individual_courses:req.body.individual_courses,
             total_fee:req.body.total_fee,
