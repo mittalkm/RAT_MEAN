@@ -7,10 +7,12 @@ var Student=mongoose.model('student',{
         minlength:1
     },
     mobile:{
-        type:Number
+        type:Number,
+        unique:true
     },
     email:{
         type:String,
+        unique:true
     },
     college:{
         type:String
