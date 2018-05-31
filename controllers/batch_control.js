@@ -33,7 +33,8 @@ module.exports={
 
     createBatch(req,res,next){
         var arrn=[];
-        var iarr=req.body.batch_students;
+        let iarr=req.body.batch_students.map(Number);
+        console.log(iarr);
         Student.find({
             mobile:{
                 $in:iarr

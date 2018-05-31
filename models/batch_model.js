@@ -3,7 +3,6 @@ const Schema=mongoose.Schema;
 var BatchSchema=new Schema({
     name:{
         type:String,
-        required:true,
     },
     course:{
         type:String
@@ -15,8 +14,7 @@ var BatchSchema=new Schema({
         type:String
     },
     time:{
-        type:String,
-        required:true
+        type:String
     },
     students:[{
         name:{
