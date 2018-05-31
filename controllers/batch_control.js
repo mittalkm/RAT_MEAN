@@ -64,5 +64,20 @@ module.exports={
         .catch((e)=>{
             res.status(404).send(e);
         });
+    },
+    
+    searchBatch(req,res,body){
+        Batch.findOne({
+            faculty:req.body.faculty,
+            subject:req.body.subject
+        }).then((result)=>{
+            if(!result){
+                return res.status(403).send('Not Found')
+            }
+            res.send(result);
+        })
+        .catch((e)=>{
+            res.status(404).send(e);
+        })
     }
 }
