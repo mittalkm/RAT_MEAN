@@ -70,7 +70,7 @@ module.exports={
     searchBatch(req,res,body){
         Batch.findOne({
             faculty:req.body.faculty,
-            subject:req.body.subject
+            course:req.body.course
         }).then((result)=>{
             if(!result){
                 return res.status(403).send('Not Found')
