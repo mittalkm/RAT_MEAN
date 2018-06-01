@@ -8,7 +8,7 @@ const batch_route=require('./routes/batch_route.js');
 const bodyParser=require('body-parser');
 const app=express();
 const cors=require('cors');
-app.use(cors())
+app.use(cors());
 app.use(bodyParser.json());
 enquery_route(app);
 package_route(app);
