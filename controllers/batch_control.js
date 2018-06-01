@@ -106,8 +106,7 @@ module.exports={
             for(let item of result){
                 carr.push(_.pick(item,['college']).college);
             }
-            var x=_.uniqWith(carr);
-            res.send(x);
+            res.send(_.uniqWith(carr));
         }).catch((e)=>{
             res.send(e);
         });
@@ -142,5 +141,41 @@ module.exports={
         }).catch((e)=>{
             res.status(404).send(e);
         });
+    },
+
+    getStdMobile(req,res,next){
+        Student.findOne({
+            mobile:req.body.mobile
+        }).then((result)=>{
+            if(!result){
+                return res.send('No Student Have This Mobile No.');
+            }
+            res.send(result);
+        })
+        .catch((e)=>{
+            res.status(418).send(e);
+        })
+    },
+
+    getDueStudent(req,res,next){
+        var date=new Date();
+        Student.find({
+            $and:[{fee_due:{
+                $gt:0
+            }},{due_date:{$lt:date}}]
+        }).then((result)=>{
+            if(!result){
+                return res.status(418).send('No Student Found');
+            }
+            var data=[];
+            for(let item of result){
+                vdata=_.pick(item,['name','mobile','email']);
+                data.push(vdata);
+            }
+            res.send(data);
+        })
+        .catch((e)=>{
+            res.send(404).send(e);
+        })
     }
 }
