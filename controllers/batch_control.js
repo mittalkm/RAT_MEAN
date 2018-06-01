@@ -85,7 +85,6 @@ module.exports={
     searchOneBatch(req,res,body){
         Batch.findOne({
             faculty:req.body.faculty,
-            course:req.body.course,
             name:req.body.name
         }).then((result)=>{
             if(!result){
@@ -155,6 +154,28 @@ module.exports={
         })
         .catch((e)=>{
             res.status(418).send(e);
+        })
+    },
+
+    getDueStudent(req,res,next){
+        var date=new Date();
+        Student.find({
+            $and:[{fee_due:{
+                $gt:0
+            }},{due_date:{$lt:date}}]
+        }).then((result)=>{
+            if(!result){
+                return res.status(418).send('No Student Found');
+            }
+            var data=[];
+            for(let item of result){
+                vdata=_.pick(item,['name','mobile','email']);
+                data.push(vdata);
+            }
+            res.send(data);
+        })
+        .catch((e)=>{
+            res.send(404).send(e);
         })
     }
 }
