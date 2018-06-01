@@ -142,5 +142,19 @@ module.exports={
         }).catch((e)=>{
             res.status(404).send(e);
         });
+    },
+
+    getStdMobile(req,res,next){
+        Student.findOne({
+            mobile:req.body.mobile
+        }).then((result)=>{
+            if(!result){
+                return res.send('No Student Have This Mobile No.');
+            }
+            res.send(result);
+        })
+        .catch((e)=>{
+            res.status(418).send(e);
+        })
     }
 }
