@@ -10,6 +10,7 @@ const app=express();
 const cors=require('cors');
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 enquery_route(app);
 package_route(app);
 course_route(app);

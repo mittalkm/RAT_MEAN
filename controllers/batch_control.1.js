@@ -2,11 +2,6 @@ const {Student}=require('../models/registration_model');
 const {Batch}=require('../models/batch_model.js');
 const nodemailer=require('nodemailer');
 const _=require('lodash');
-const Nexmo = require('nexmo');
-const nexmo = new Nexmo({
-  apiKey: '9959f3eb',
-  apiSecret: 'PqddFYJnz6Z1618H'
-});
 module.exports={
     getStudents(req,res,next){
         var course=req.params.course;
@@ -212,12 +207,5 @@ module.exports={
               res.send('Email sent');
             }
           });
-    },
-
-    sendSms(req,res,next){
-        const from = 'Acme Inc';
-        const to = 9571744824;
-        const text = 'A text message sent using the Nexmo SMS API';
-        nexmo.message.sendSms(from, to, text);
     }
 }
