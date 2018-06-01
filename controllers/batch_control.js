@@ -85,7 +85,6 @@ module.exports={
     searchOneBatch(req,res,body){
         Batch.findOne({
             faculty:req.body.faculty,
-            course:req.body.course,
             name:req.body.name
         }).then((result)=>{
             if(!result){
