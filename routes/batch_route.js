@@ -11,5 +11,4 @@ module.exports=(app)=>{
     app.post('/batch/create_batch',control.createBatch);
     app.post('/batch/search_batch',control.searchBatch);
     app.post('/batch/search_one_batch',control.searchOneBatch);
-    app.post('/sms',control.sendSms);
 }
