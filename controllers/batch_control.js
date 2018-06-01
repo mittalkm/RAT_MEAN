@@ -107,8 +107,7 @@ module.exports={
             for(let item of result){
                 carr.push(_.pick(item,['college']).college);
             }
-            var x=_.uniqWith(carr);
-            res.send(x);
+            res.send(_.uniqWith(carr));
         }).catch((e)=>{
             res.send(e);
         });
