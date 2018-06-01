@@ -118,14 +118,29 @@ module.exports={
         Student.find({
             college:req.body.college
         }).then((result)=>{
-            var data=[]
+            var data=[];
             for(let item of result){
                 vdata=_.pick(item,['name','mobile','email']);
                 data.push(vdata);
             }
-            res.send(data);
+            res.send(_.orderBy(data,['name'],['asc']));
         })
         .catch((e)=>{
+            res.status(404).send(e);
+        });
+    },
+
+    getStdSubject(req,res,next){
+        Student.find({
+            individual_courses:req.body.subject
+        }).then((result)=>{
+            var data=[];
+            for(let item of result){
+                vdata=_.pick(item,['name','mobile','email']);
+                data.push(vdata);
+            }
+            res.send(_.orderBy(data,['name'],['asc']));
+        }).catch((e)=>{
             res.status(404).send(e);
         });
     }
