@@ -80,5 +80,21 @@ module.exports={
         .catch((e)=>{
             res.status(404).send(e);
         })
+    },
+
+    getAllCollege(req,res,next){
+        Student.find().then((result)=>{
+            var carr=[];
+            if(!result){
+                return res.status(404).send('No Record Found');
+            }
+            for(let item of result){
+                carr.push(_.pick(item,['college']));
+            }
+            carr=_.uniqWith(carr);
+            res.send(carr);
+        }).catch((e)=>{
+            res.send(e);
+        });
     }
 }
