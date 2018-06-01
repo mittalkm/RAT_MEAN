@@ -1,6 +1,7 @@
 const app=require('../admin.js');
 const control=require('../controllers/batch_control.js');
 module.exports=(app)=>{
+    app.post('/search/by_college',control.getStdCollege);
     app.get('/batch/get_college/all',control.getAllCollege);
     app.get('/batch/:course',control.getStudents);
     app.post('/batch/create_batch',control.createBatch);

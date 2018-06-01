@@ -81,7 +81,7 @@ module.exports={
             res.status(404).send(e);
         })
     },
-    
+
     searchOneBatch(req,res,body){
         Batch.findOne({
             faculty:req.body.faculty,
@@ -105,13 +105,27 @@ module.exports={
                 return res.status(404).send('No Record Found');
             }
             for(let item of result){
-                carr.push(_.pick(item,['college']));
+                carr.push(_.pick(item,['college']).college);
             }
-            carr=_.uniqWith(carr);
-            res.send(carr);
+            res.send(_.uniqWith(carr));
         }).catch((e)=>{
             res.send(e);
         });
-    }
+    },
     
+    getStdCollege(req,res,next){
+        Student.find({
+            college:req.body.college
+        }).then((result)=>{
+            var data=[]
+            for(let item of result){
+                vdata=_.pick(item,['name','mobile','email']);
+                data.push(vdata);
+            }
+            res.send(data);
+        })
+        .catch((e)=>{
+            res.status(404).send(e);
+        });
+    }
 }
