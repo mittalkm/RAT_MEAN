@@ -149,7 +149,7 @@ module.exports={
             mobile:req.body.mobile
         }).then((result)=>{
             if(!result){
-                return res.send('No Student Have This Mobile No.');
+                return res.status(404).send('No Student Have This Mobile No.');
             }
             res.send(result);
         })
@@ -170,7 +170,7 @@ module.exports={
             }
             var data=[];
             for(let item of result){
-                vdata=_.pick(item,['name','mobile','email']);
+                vdata=_.pick(item,['name','mobile','email','fee_due','due_date']);
                 data.push(vdata);
             }
             res.send(data);
@@ -202,8 +202,10 @@ module.exports={
           
           transporter.sendMail(mailOptions, function(error, info){
             if (error) {
+                console.log(error);
               return res.send(error);
             } else {
+                console.log('email sent');
               res.send('Email sent');
             }
           });
