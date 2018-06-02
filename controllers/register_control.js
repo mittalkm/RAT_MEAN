@@ -33,8 +33,11 @@ module.exports={
                         name:std.package_opted
                     })
                     .then((pkd)=>{
-                        for(let cnt of pkd.content){
-                            std.individual_courses.push(cnt);
+                        if(pkd.content)
+                        {
+                            for(let cnt of pkd.content){
+                                std.individual_courses.push(cnt);
+                            }
                         }
                         return std;
                     })
