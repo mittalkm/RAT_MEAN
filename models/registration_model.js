@@ -42,8 +42,11 @@ var Student=mongoose.model('student',{
             type:Date
         }
     ],
+    last_due:{
+        type:Date
+    },
     due_date:[{
-        type:Date,
+        type:Date
     }],
     registration_date:{
         type:Date

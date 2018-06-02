@@ -172,16 +172,16 @@ module.exports={
     getDueStudent(req,res,next){
         var date=new Date();
         Student.find({
-            $and:[{fee_due:{
+            $and:[{
+            fee_due:{
                 $gt:0
-            }},{date:
-                {$gt:{
-                         $arrayElemAt: ["$due_date", -1]
-                }}
-            }]
-        }).then((result)=>{
-            if(!result){
-                return res.status(418).send('No Student Found');
+            }},{
+                last_due:{
+                    $lt:date
+                }    
+            }]}).then((result)=>{
+            if(result.length==0){
+                return res.status(404).send('No Student Found');
             }
             var data=[];
             for(let item of result){
