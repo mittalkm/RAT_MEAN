@@ -22,8 +22,8 @@ module.exports={
         });
         Student.findOne({
             $and:[{name:req.body.name},{mobile:req.body.mobile}]
-        }).then((res)=>{
-            if(!res){
+        }).then((result)=>{
+            if(!result){
                 if(std.package_opted){
                     Package.findOne({
                         name:std.package_opted
