@@ -191,7 +191,7 @@ module.exports={
                 $gt:0
             }},{
                 last_due:{
-                    $lt:date
+                    $lte:date
                 }    
             }]}).then((result)=>{
             if(result.length==0){
