@@ -18,39 +18,48 @@ module.exports={
             fee_due:req.body.fee_due,
             comments:req.body.comments
         });
-        if(std.package_opted){
-            Package.findOne({
-                name:std.package_opted
-            })
-            .then((pkd)=>{
-                for(let cnt of pkd.content){
-                    std.individual_courses.push(cnt);
+        Student.findOne({
+            $and:[req.body.name,req.body.mobile]
+        }).then((res)=>{
+            if(!res){
+                if(std.package_opted){
+                    Package.findOne({
+                        name:std.package_opted
+                    })
+                    .then((pkd)=>{
+                        for(let cnt of pkd.content){
+                            std.individual_courses.push(cnt);
+                        }
+                        return std;
+                    })
+                    .then((std)=>{
+                        std.individual_courses=_.uniqWith(std.individual_courses);
+                        std.save()
+                    })
+                    .then(()=>{
+                            res.send('Registration Successfull');
+                    })
+                    .catch((e)=>{
+                        res.status(403).send(e);
+                        console.log(e);
+                        next();
+                    });
                 }
-                return std;
-            })
-            .then((std)=>{
-                std.individual_courses=_.uniqWith(std.individual_courses);
-                std.save()
-            })
-            .then(()=>{
-                    res.send('Registration Successfull');
-            })
-            .catch((e)=>{
-                res.status(400).send(e);
-                console.log(e);
-                next();
-            });
-        }
-        else{
-            std.save().then(()=>{
-                res.send('Registration Successfull');
-            })
-            .catch((e)=>{
-                res.status(400).send(e);
-                console.log(e);
-                next();
-            });
-        }
+                else{
+                    std.save().then(()=>{
+                        res.send('Registration Successfull');
+                    })
+                    .catch((e)=>{
+                        res.status(403).send(e);
+                        console.log(e);
+                        next();
+                    });
+                }
+            }
+            else{
+                return res.status(418).send('Student is already registered at R.A.T');
+            }
+        });
     }
 
 }
