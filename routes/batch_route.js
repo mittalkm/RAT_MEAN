@@ -4,6 +4,7 @@ module.exports=(app)=>{
     app.post('/email',control.sendMail);
     app.get('/search/duefee',control.getDueStudent);
     app.post('/search/by_mobile',control.getStdMobile);
+    app.post('/search/by_name',control.getStdName);
     app.get('/getall',control.getAllStudent);
     app.post('/search/by_subject',control.getStdSubject);
     app.post('/search/by_college',control.getStdCollege);
