@@ -12,7 +12,6 @@ var Student=mongoose.model('student',{
     },
     email:{
         type:String,
-        unique:true
     },
     college:{
         type:String
