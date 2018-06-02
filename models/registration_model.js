@@ -12,7 +12,6 @@ var Student=mongoose.model('student',{
     },
     email:{
         type:String,
-        unique:true
     },
     college:{
         type:String
@@ -25,6 +24,9 @@ var Student=mongoose.model('student',{
         type:String,
         default:null
     }],
+    installments:[{
+        type:String
+    }],
     total_fee:{
         type:Number,
     },
@@ -35,10 +37,14 @@ var Student=mongoose.model('student',{
         type:Number,
         default:0
     },
-    due_date:{
+    pay_date:[
+        {
+            type:Date
+        }
+    ],
+    due_date:[{
         type:Date,
-        default:null
-    },
+    }],
     registration_date:{
         type:Date
     },

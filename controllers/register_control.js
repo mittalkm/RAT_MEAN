@@ -4,6 +4,7 @@ const _=require('lodash');
 module.exports={
     
     addStudent(req,res,next){
+        var nulla=[];
         var std=new Student({
             name:req.body.name,
             mobile:req.body.mobile,
@@ -16,6 +17,7 @@ module.exports={
             registration_date:req.body.registration_date,
             fee_paid:req.body.fee_paid,
             fee_due:req.body.fee_due,
+            installments:nulla,
             comments:req.body.comments
         });
         Student.findOne({
@@ -57,7 +59,7 @@ module.exports={
                 }
             }
             else{
-                res.status(418).send('Student is already registered at R.A.T');
+                res.status(409).send('Student is already registered at R.A.T');
             }
         });
     }
