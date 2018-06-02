@@ -149,12 +149,23 @@ module.exports={
             mobile:req.body.mobile
         }).then((result)=>{
             if(!result){
-                return res.send('No Student Have This Mobile No.');
+                return res.status(404).send('No Student Have This Mobile No.');
             }
             res.send(result);
         })
         .catch((e)=>{
             res.status(418).send(e);
+        })
+    },
+
+    getAllStudent(req,res,next){
+        Student.find().then((result)=>{
+            var arr=[];
+            for(let item of result){
+            var obj=_.pick(item,['name']);
+            arr.push(obj.name);
+        }
+        res.send(arr);
         })
     },
 
