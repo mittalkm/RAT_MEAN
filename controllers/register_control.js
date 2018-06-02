@@ -1,10 +1,12 @@
 const {Student}=require('../models/registration_model.js');
 const {Package}=require('../models/package_model.js');
 const _=require('lodash');
+
+
 module.exports={
-    
     addStudent(req,res,next){
         var nulla=[];
+        var darr=[0];
         var std=new Student({
             name:req.body.name,
             mobile:req.body.mobile,
@@ -13,7 +15,9 @@ module.exports={
             package_opted:req.body.package_opted,
             individual_courses:req.body.individual_courses,
             total_fee:req.body.total_fee,
-            due_date:req.body.due_date,
+            due_date:darr,
+            pay_date:nulla,
+            last_due:0,
             registration_date:req.body.registration_date,
             fee_paid:req.body.fee_paid,
             fee_due:req.body.fee_due,

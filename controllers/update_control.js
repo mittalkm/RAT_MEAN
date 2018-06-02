@@ -12,7 +12,13 @@ module.exports={
             const nduefee=result.fee_due-req.body.apaid;
             const nduedate=req.body.due_date;
             result.installments.push(req.body.apaid);
-            result.due_date.push(nduedate);
+            if(new Date(result.due_date[0]).getTime()===new Date("1970-01-01").getTime()){
+                result.due_date[0]=nduedate;
+            }
+            else{
+                result.due_date.push(nduedate);
+            }
+            result.last_due=result.due_date[result.due_date.length-1];
             result.pay_date.push(new Date());
             result.fee_due=nduefee;
             return result;
