@@ -199,7 +199,7 @@ module.exports={
             }
             var data=[];
             for(let item of result){
-                vdata=_.pick(item,['name','mobile','email']);
+                vdata=_.pick(item,['name','mobile','email','last_due','fee_due']);
                 data.push(vdata);
             }
             res.send(data);

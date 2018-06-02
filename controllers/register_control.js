@@ -7,6 +7,9 @@ module.exports={
     addStudent(req,res,next){
         var nulla=[];
         var darr=[0];
+        var someDate = new Date();
+        var numberOfDaysToAdd = 4;
+        someDate.setDate(someDate.getDate() + numberOfDaysToAdd); 
         var std=new Student({
             name:req.body.name,
             mobile:req.body.mobile,
@@ -17,7 +20,7 @@ module.exports={
             total_fee:req.body.total_fee,
             due_date:darr,
             pay_date:nulla,
-            last_due:0,
+            last_due:someDate,
             registration_date:req.body.registration_date,
             fee_paid:req.body.fee_paid,
             fee_due:req.body.fee_due,
