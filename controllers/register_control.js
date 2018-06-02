@@ -7,7 +7,7 @@ module.exports={
     addStudent(req,res,next){
         var nulla=[];
         var darr=[0];
-        var someDate = new Date();
+        var someDate = new Date(req.body.registration_date);
         var numberOfDaysToAdd = 4;
         someDate.setDate(someDate.getDate() + numberOfDaysToAdd); 
         var std=new Student({
