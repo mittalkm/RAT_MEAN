@@ -149,7 +149,7 @@ module.exports={
             mobile:req.body.mobile
         }).then((result)=>{
             if(!result){
-                return res.status(404).send('No Student Have This Mobile No.');
+                return res.send('No Student Have This Mobile No.');
             }
             res.send(result);
         })
@@ -163,14 +163,18 @@ module.exports={
         Student.find({
             $and:[{fee_due:{
                 $gt:0
-            }},{due_date:{$lt:date}}]
+            }},{date:
+                {$gt:{
+                         $arrayElemAt: ["$due_date", -1]
+                }}
+            }]
         }).then((result)=>{
             if(!result){
                 return res.status(418).send('No Student Found');
             }
             var data=[];
             for(let item of result){
-                vdata=_.pick(item,['name','mobile','email','fee_due','due_date']);
+                vdata=_.pick(item,['name','mobile','email']);
                 data.push(vdata);
             }
             res.send(data);
@@ -202,10 +206,8 @@ module.exports={
           
           transporter.sendMail(mailOptions, function(error, info){
             if (error) {
-                console.log(error);
               return res.send(error);
             } else {
-                console.log('email sent');
               res.send('Email sent');
             }
           });
