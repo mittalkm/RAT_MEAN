@@ -21,7 +21,7 @@ module.exports={
             comments:req.body.comments
         });
         Student.findOne({
-            $and:[req.body.name,req.body.mobile]
+            $and:[{name:req.body.name},{mobile:req.body.mobile}]
         }).then((res)=>{
             if(!res){
                 if(std.package_opted){
@@ -59,11 +59,7 @@ module.exports={
                 }
             }
             else{
-<<<<<<< HEAD
-                res.status(409).send('Student is already registered at R.A.T');
-=======
-                return res.status(418).send('Student is already registered at R.A.T');
->>>>>>> 69f51328e1845c4e76c925d7757e987c1367ebc3
+                return res.status(409).send('Student is already registered at R.A.T');
             }
         });
     }
