@@ -19,9 +19,9 @@ module.exports={
             comments:req.body.comments
         });
         Student.findOne({
-            $and:[req.body.name,req.body.mobile]
-        }).then((res)=>{
-            if(!res){
+            $and:[{name:req.body.name},{mobile:req.body.mobile}]
+        }).then((result)=>{
+            if(!result){
                 if(std.package_opted){
                     Package.findOne({
                         name:std.package_opted
@@ -57,7 +57,7 @@ module.exports={
                 }
             }
             else{
-                return res.status(418).send('Student is already registered at R.A.T');
+                res.status(418).send('Student is already registered at R.A.T');
             }
         });
     }
