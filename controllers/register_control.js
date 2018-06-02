@@ -19,7 +19,7 @@ module.exports={
             comments:req.body.comments
         });
         Student.findOne({
-            $and:[{name:req.body.name},{mobile:req.body.mobile}]
+            mobile:req.body.mobile
         }).then((result)=>{
             if(!result){
                 if(std.package_opted){
