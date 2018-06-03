@@ -6,7 +6,7 @@ const _=require('lodash');
 module.exports={
     addStudent(req,res,next){
         var nulla=[];
-        var darr=[0];
+        var darr=[];
         var someDate = new Date(req.body.registration_date);
         var numberOfDaysToAdd = 4;
         someDate.setDate(someDate.getDate() + numberOfDaysToAdd); 
