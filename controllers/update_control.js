@@ -12,10 +12,10 @@ module.exports={
             const nduefee=result.fee_due-req.body.apaid;
             const nduedate=req.body.due_date;
             result.installments.push(req.body.apaid);
-            if(req.body.due_date){
-                if(result.due_date.length>=2){
-                    return res.status(409).send('Max 3 installments are allowed');
-                }
+            if(result.due_date.length>=2 && result.fee_due>req.body.apaid){
+                return res.status(409).send('Max 3 installments are allowed');
+            }
+            if(result.due_date.length<=2){
                 result.due_date.push(nduedate);
             }
             if(result.due_date.length!=0){
