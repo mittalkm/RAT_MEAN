@@ -12,7 +12,12 @@ module.exports={
             const nduefee=result.fee_due-req.body.apaid;
             const nduedate=req.body.due_date;
             result.installments.push(req.body.apaid);
-            result.due_date.push(nduedate);
+            if(req.body.due_date){
+                if(result.due_date.length>=2){
+                    return res.status(409).send('Max 3 installments are allowed');
+                }
+                result.due_date.push(nduedate);
+            }
             if(result.due_date.length!=0){
                 result.last_due=result.due_date[result.due_date.length-1];
             }
