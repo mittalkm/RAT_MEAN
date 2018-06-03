@@ -23,6 +23,7 @@ module.exports={
             }
             result.pay_date.push(new Date());
             result.fee_due=nduefee;
+            result.fee_paid=result.fee_paid+req.body.apaid;
             return result;
         }).then((result)=>{
             return Student.update({mobile:result.mobile},{
