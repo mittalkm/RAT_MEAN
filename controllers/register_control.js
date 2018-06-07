@@ -13,6 +13,10 @@ module.exports={
         var std=new Student({
             name:req.body.name,
             mobile:req.body.mobile,
+            alternate_mobile:req.body.alternate_mobile,
+            father_name:req.body.father_name,
+            father_mobile:req.body.father_mobile,
+            address:req.body.address,
             email:req.body.email,
             college:req.body.college,
             package_opted:req.body.package_opted,
@@ -72,6 +76,27 @@ module.exports={
                  res.status(409).send('Student is already registered at R.A.T');
             }
         });
+    },
+    viewAllDateWise(req,res,next){
+        // view all students b/w having registration_date in a range given.
+        Student.find({
+            $and:[{
+                registration_date:{
+                    $gte:req.body.ldate
+                }
+            },{
+                registration_date:{
+                    $lte:req.body.mdate
+                }
+            }]
+        }).then((result)=>{
+            var arr=[];
+            for(let cnt of result){
+                arr.push(_.pick(cnt,['name','email','mobile','registration_date']));
+            }
+            res.send(arr);
+        }).catch((e)=>{
+            res.status(404).send(e);
+        });
     }
-
 }

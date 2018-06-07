@@ -10,6 +10,18 @@ var Student=mongoose.model('student',{
         type:Number,
         unique:true
     },
+    alternate_mobile:{
+        type:Number
+    },
+    father_name:{
+        type:String
+    },
+    father_mobile:{
+        type:Number,
+    },
+    address:{
+        type:String
+    },
     email:{
         type:String,
     },
