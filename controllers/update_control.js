@@ -36,6 +36,10 @@ module.exports={
         .catch((e)=>{
             res.status(404).send(e);
         });
+    },
+
+    updateStudentCourse(req,res,next){
+        
     }
 
 }
