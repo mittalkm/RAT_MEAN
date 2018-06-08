@@ -1,5 +1,4 @@
 const express=require('express');
-const fs=require('fs');
 const {Auth}=require('../models/auth_model.js');
 module.exports={
 
@@ -8,14 +7,7 @@ module.exports={
         query[req.params.centre]=req.body.pwd;
         Auth.findOne(query).then((result)=>{
             if(result){
-                fs.unlink('./controllers/centre.txt', function (err) {
-                    if (err) throw err;
-                    console.log('File deleted!');
-                  });
-                fs.appendFile('./controllers/centre.txt', `${req.params.centre}`, function (err) {
-                    if (err) throw err;
-                    console.log('Saved!');
-                  });
+                req.session.centre=req.params.centre;
                 res.status(200).send('Auth Successfull');
             }
             else{

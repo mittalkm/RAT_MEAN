@@ -16,6 +16,10 @@ var BatchSchema=new Schema({
     time:{
         type:String
     },
+    centre:{
+        type:String,
+        required:true
+    },
     students:[{
         name:{
             type:String

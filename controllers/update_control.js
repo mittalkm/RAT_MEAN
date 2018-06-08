@@ -4,7 +4,8 @@ module.exports={
 
     updateFee(req,res,next){
         Student.findOne({
-            mobile:req.body.mobile
+            mobile:req.body.mobile,
+            centre:req.session.centre
         }).then((result)=>{
             if(!result){
                 return res.status(418).send('Student Not Found!!!');
@@ -32,7 +33,7 @@ module.exports={
             }
             return result;
         }).then((result)=>{
-            return Student.update({mobile:result.mobile},{
+            return Student.update({mobile:result.mobile,centre:centre},{
                 $set:result
             });
         })
@@ -50,7 +51,7 @@ module.exports={
                mobile:req.body.mobile
            },{
                alternate_mobile:req.body.mobile
-           }]
+           }],centre:req.session.centre
         }).then((result)=>{
             result.individual_courses=result.individual_courses.concat(req.body.courses);
             result.individual_courses=_.uniqWith(result.individual_courses);
@@ -70,7 +71,7 @@ module.exports={
             res.send('Student details updated successfully.');
         }).catch((e)=>{
             res.status(404).send(e);
-        })
+        });
     }
 
 }
