@@ -24,5 +24,4 @@ course_route(app);
 register_route(app);
 batch_route(app);
 update_route(app);
-const enqueryr=require('./routes/enquery_route.js');
 module.exports=app;
