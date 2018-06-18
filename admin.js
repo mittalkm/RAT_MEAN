@@ -9,14 +9,22 @@ const update_route=require('./routes/update_route.js');
 const password_route=require('./routes/password_route.js');
 const bodyParser=require('body-parser');
 const cookieParser=require('cookie-parser');
-const session = require('express-session')
+const session = require('express-session');
+var MongoStore = require("connect-mongo")(session);
 const app=express();
 const cors=require('cors');
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(session({secret:'ratsession'}));
+app.use(session({secret:'ratsession',resave: true, 
+saveUninitialized: false,
+rolling: true,
+store: new MongoStore({mongooseConnection:mongoose.connection}),
+cookie: {
+    httpOnly: false, 
+    secure: false
+}}));
 password_route(app);
 enquery_route(app);
 package_route(app);

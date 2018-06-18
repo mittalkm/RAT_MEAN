@@ -8,6 +8,7 @@ module.exports={
         Auth.findOne(query).then((result)=>{
             if(result){
                 req.session.centre=req.params.centre;
+                req.session.save();
                 res.status(200).send('Auth Successfull');
             }
             else{
