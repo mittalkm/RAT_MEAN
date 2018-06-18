@@ -3,11 +3,7 @@ const {Package}=require('../models/package_model.js');
 const _=require('lodash');
 module.exports={
     addStudent(req,res,next){
-<<<<<<< HEAD
         console.log(req.session.centre);
-=======
-        //console.log(req.session.centre);
->>>>>>> 9fbda69a348523431ee0501d6eed0731706fb3f8
         var nulla=[];
         var darr=[];
         var someDate = new Date(req.body.registration_date);
