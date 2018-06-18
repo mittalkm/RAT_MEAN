@@ -1,17 +1,14 @@
 const mongoose=require('mongoose');
-var Student=mongoose.model('student',{
+const Schema=mongoose.Schema;
+const Std=new Schema({
     name:{
         type:String,
         required:true,
         trim:true,
         minlength:1
     },
-    centre:{
-        type:String
-    },
     mobile:{
         type:Number,
-        unique:true
     },
     alternate_mobile:{
         type:Number
@@ -39,6 +36,10 @@ var Student=mongoose.model('student',{
         type:String,
         default:null
     }],
+    centre:{
+        type:String,
+        required:true
+    },
     installments:[{
         type:String
     }],
@@ -69,8 +70,9 @@ var Student=mongoose.model('student',{
     comments:{
         type:String,
         default:null
-    }
+    },
 });
+var Student=mongoose.model('student',Std);
 module.exports={
     Student:Student
 };

@@ -1,11 +1,13 @@
 const {Student}=require('../models/registration_model.js');
 const {Package}=require('../models/package_model.js');
 const _=require('lodash');
-
-
 module.exports={
     addStudent(req,res,next){
+<<<<<<< HEAD
         console.log(req.session.centre);
+=======
+        //console.log(req.session.centre);
+>>>>>>> 9fbda69a348523431ee0501d6eed0731706fb3f8
         var nulla=[];
         var darr=[];
         var someDate = new Date(req.body.registration_date);
@@ -23,6 +25,7 @@ module.exports={
             college:req.body.college,
             package_opted:req.body.package_opted,
             individual_courses:req.body.individual_courses,
+            centre:req.session.centre,
             total_fee:req.body.total_fee,
             due_date:darr,
             pay_date:nulla,
@@ -81,8 +84,9 @@ module.exports={
     },
     viewAllDateWise(req,res,next){
         // view all students b/w having registration_date in a range given.
+        var text = fs.readFileSync('./controllers/centre.txt','utf8')
         Student.find({
-            $and:[{
+            $and:[{centre:req.session.centre},{
                 registration_date:{
                     $gte:req.body.ldate
                 }

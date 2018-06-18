@@ -4,9 +4,6 @@ var BatchSchema=new Schema({
     name:{
         type:String,
     },
-    centre:{
-        type:String,
-    },
     course:{
         type:String
     },
@@ -18,6 +15,10 @@ var BatchSchema=new Schema({
     },
     time:{
         type:String
+    },
+    centre:{
+        type:String,
+        required:true
     },
     students:[{
         name:{

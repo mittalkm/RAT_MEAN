@@ -8,7 +8,8 @@ module.exports={
         Student.find({
             individual_courses:{
                 $in:[course]
-            },centre:req.session.centre
+            },
+            centre:req.session.centre
         }).then((doc)=>{
             var arr=[];
             var frr=[];
@@ -45,7 +46,8 @@ module.exports={
             for(let item of result){
                 arrn.push({
                     name:item.name,
-                    mobile:item.mobile
+                    mobile:item.mobile,
+                    centre:item.centre
                 });
             }
             return arrn;    
@@ -56,6 +58,7 @@ module.exports={
                 course:req.body.subject,
                 faculty:req.body.faculty,
                 students:arrd,
+                centre:req.session.centre,
                 date:req.body.date,
                 time:req.body.time,
                 centre:req.session.centre
@@ -102,7 +105,9 @@ module.exports={
     },
 
     getAllCollege(req,res,next){
-        Student.find().then((result)=>{
+        Student.find({
+            centre:req.session.centre
+        }).then((result)=>{
             var carr=[];
             if(!result){
                 return res.status(404).send('No Record Found');
@@ -195,7 +200,8 @@ module.exports={
     getDueStudent(req,res,next){
         var date=new Date();
         Student.find({
-            $and:[{
+            $and:[
+                {centre:req.session.centre},{
             fee_due:{
                 $gt:0
             }},{
