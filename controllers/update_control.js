@@ -39,8 +39,8 @@ module.exports={
         });
     },
 
-    updateStudentCourse(req,res,next){
+    /*updateStudentCourse(req,res,next){
         
-    }
+    }*/
 
 }
