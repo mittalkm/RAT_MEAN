@@ -4,7 +4,8 @@ module.exports={
 
     updateFee(req,res,next){
         Student.findOne({
-            mobile:req.body.mobile
+            mobile:req.body.mobile,
+            centre:req.session.centre
         }).then((result)=>{
             if(!result){
                 return res.status(418).send('Student Not Found!!!');

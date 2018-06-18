@@ -8,7 +8,7 @@ module.exports={
         Student.find({
             individual_courses:{
                 $in:[course]
-            }
+            },centre:req.session.centre
         }).then((doc)=>{
             var arr=[];
             var frr=[];
@@ -57,7 +57,8 @@ module.exports={
                 faculty:req.body.faculty,
                 students:arrd,
                 date:req.body.date,
-                time:req.body.time
+                time:req.body.time,
+                centre:req.session.centre
             });
             return sbatch.save()
         }).then(()=>{
@@ -71,7 +72,8 @@ module.exports={
     searchBatch(req,res,body){
         Batch.find({
             faculty:req.body.faculty,
-            course:req.body.subject
+            course:req.body.subject,
+            centre:req.session.centre
         }).then((result)=>{
             if(!result){
                 return res.status(403).send('Not Found')
@@ -86,7 +88,8 @@ module.exports={
     searchOneBatch(req,res,body){
         Batch.findOne({
             faculty:req.body.faculty,
-            name:req.body.name
+            name:req.body.name,
+            centre:req.session.centre
         }).then((result)=>{
             if(!result){
                 return res.status(403).send('Not Found')
@@ -115,7 +118,8 @@ module.exports={
     
     getStdCollege(req,res,next){
         Student.find({
-            college:req.body.college
+            college:req.body.college,
+            centre:req.session.centre
         }).then((result)=>{
             var data=[];
             for(let item of result){
@@ -131,7 +135,8 @@ module.exports={
 
     getStdSubject(req,res,next){
         Student.find({
-            individual_courses:req.body.subject
+            individual_courses:req.body.subject,
+            centre:req.session.centre
         }).then((result)=>{
             var data=[];
             for(let item of result){
@@ -146,7 +151,8 @@ module.exports={
 
     getStdMobile(req,res,next){
         Student.findOne({
-            mobile:req.body.mobile
+            mobile:req.body.mobile,
+            centre:req.session.centre
         }).then((result)=>{
             if(!result){
                 return res.status(404).send('No Student Have This Mobile No.');
@@ -160,7 +166,8 @@ module.exports={
 
     getStdName(req,res,next){
         Student.findOne({
-            name:req.body.name
+            name:req.body.name,
+            centre:req.session.centre
         }).then((result)=>{
             if(!result){
                 return res.status(404).send('No Student Have This Mobile No.');
@@ -173,7 +180,9 @@ module.exports={
     },
 
     getAllStudent(req,res,next){
-        Student.find().then((result)=>{
+        Student.find({
+            centre:req.session.centre
+        }).then((result)=>{
             var arr=[];
             for(let item of result){
             var obj=_.pick(item,['name']);
@@ -193,6 +202,8 @@ module.exports={
                 last_due:{
                     $lte:date
                 }    
+            },{
+                centre:req.session.centre
             }]}).then((result)=>{
             if(result.length==0){
                 return res.status(404).send('No Student Found');

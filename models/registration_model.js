@@ -6,6 +6,9 @@ var Student=mongoose.model('student',{
         trim:true,
         minlength:1
     },
+    centre:{
+        type:String
+    },
     mobile:{
         type:Number,
         unique:true

@@ -13,6 +13,7 @@ module.exports={
         var std=new Student({
             name:req.body.name,
             mobile:req.body.mobile,
+            centre:req.session.centre,
             alternate_mobile:req.body.alternate_mobile,
             father_name:req.body.father_name,
             father_mobile:req.body.father_mobile,
@@ -32,7 +33,7 @@ module.exports={
             comments:req.body.comments
         });
         Student.findOne({
-            $and:[{name:req.body.name},{mobile:req.body.mobile}]
+            $and:[{name:req.body.name},{mobile:req.body.mobile},{centre:req.session.centre}]
         }).then((result)=>{
             if(!result){
                 if(std.package_opted){
@@ -88,6 +89,8 @@ module.exports={
                 registration_date:{
                     $lte:req.body.mdate
                 }
+            },{
+                centre:req.session.centre
             }]
         }).then((result)=>{
             var arr=[];
