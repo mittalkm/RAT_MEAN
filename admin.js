@@ -18,12 +18,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({secret:'ratsession',resave: true, 
-saveUninitialized: false,
+saveUninitialized: true,
 rolling: true,
 store: new MongoStore({mongooseConnection:mongoose.connection}),
 cookie: {
     httpOnly: false, 
-    secure: false
+    secure: false,
+    maxAge:86000
 }}));
 password_route(app);
 enquery_route(app);
