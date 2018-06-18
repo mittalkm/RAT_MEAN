@@ -5,6 +5,7 @@ const _=require('lodash');
 
 module.exports={
     addStudent(req,res,next){
+        console.log(req.session.centre);
         var nulla=[];
         var darr=[];
         var someDate = new Date(req.body.registration_date);
