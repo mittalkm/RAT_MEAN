@@ -7,6 +7,9 @@ const Std=new Schema({
         trim:true,
         minlength:1
     },
+    centre:{
+        type:String
+    },
     mobile:{
         type:Number,
     },

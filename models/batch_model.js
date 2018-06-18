@@ -4,6 +4,9 @@ var BatchSchema=new Schema({
     name:{
         type:String,
     },
+    centre:{
+        type:String,
+    },
     course:{
         type:String
     },

@@ -60,7 +60,8 @@ module.exports={
                 students:arrd,
                 centre:req.session.centre,
                 date:req.body.date,
-                time:req.body.time
+                time:req.body.time,
+                centre:req.session.centre
             });
             return sbatch.save()
         }).then(()=>{
@@ -207,6 +208,8 @@ module.exports={
                 last_due:{
                     $lte:date
                 }    
+            },{
+                centre:req.session.centre
             }]}).then((result)=>{
             if(result.length==0){
                 return res.status(404).send('No Student Found');

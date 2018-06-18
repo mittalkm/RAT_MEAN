@@ -1,6 +1,5 @@
 const express=require('express');
 const {Auth}=require('../models/auth_model.js');
-const fs=require('fs');
 module.exports={
 
     checkAuth(req,res,next){
