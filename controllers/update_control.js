@@ -4,7 +4,12 @@ const {Session}=require('../models/session_model.js');
 var y;
 setInterval(()=>{
     Session.find().then(function(res) {
-        y=res[0].centre;
+        if(res.length!=0){
+            y=res[0].centre;
+        }
+        else{
+            y='tr';
+        }
     });
 },2000);
 module.exports={

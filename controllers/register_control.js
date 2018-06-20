@@ -5,7 +5,12 @@ const _=require('lodash');
 var y;
 setInterval(()=>{
     Session.find().then(function(res) {
-        y=res[0].centre;
+        if(res.length!=0){
+            y=res[0].centre;
+        }
+        else{
+            y='tr';
+        }
     });
 },2000);
 module.exports={
