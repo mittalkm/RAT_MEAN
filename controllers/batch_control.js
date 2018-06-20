@@ -176,7 +176,7 @@ module.exports={
     getStdMobile(req,res,next){
         const centren=y;
         Student.findOne({
-            mobile:req.body.mobile,
+            $or:[{mobile:req.body.mobile},{alternate_number:req.body.alternate_number}],
             centre:centren
         }).then((result)=>{
             if(!result){
@@ -230,11 +230,7 @@ module.exports={
                 {centre:centren},{
             fee_due:{
                 $gt:0
-            }},{
-                last_due:{
-                    $lte:date
-                }    
-            }]}).then((result)=>{
+            }}]}).then((result)=>{
             if(result.length==0){
                 return res.status(404).send('No Student Found');
             }
