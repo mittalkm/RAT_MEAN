@@ -175,20 +175,34 @@ module.exports={
 
     getStdMobile(req,res,next){
         const centren=y;
-        var alter_number;
-        if(req.body.alternate_mobile){
-            alter_number=req.body.alternate_mobile;
-        }
         Student.findOne({
             $and:[
-            {mobile:req.body.mobile},
-            {centre:centren}
-            ,{alternate_mobile:alter_number}
+                {mobile:req.body.mobile},
+                {centre:centren}
             ]}).then((result)=>{
             if(!result){
-                return res.status(404).send('No Student Have This Mobile No.');
+                console.log(result);
+                if(!req.body.alternate_mobile){
+                    return res.status(404).send('No Student Have This Mobile No.'); 
+                }
+                console.log(req.body.alternate_mobile);
+                Student.findOne({
+                    $and:[
+                        {alternate_mobile:req.body.alternate_mobile},
+                        {centre:centren}
+                    ]}).then((adata)=>{
+                        console.log(adata);
+                        if(!adata){
+                            return res.status(404).send('No Student Have This Mobile No.');
+                        }
+                        else if(adata){
+                            return res.send(adata)
+                        }
+                    }); 
             }
-            res.send(result);
+            else{
+                res.send(result);
+            }
         })
         .catch((e)=>{
             res.status(418).send(e);
