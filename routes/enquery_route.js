@@ -1,4 +1,4 @@
-const app=require('../admin.js');
+const {app}=require('../admin.js');
 const econtroller=require('../controllers/enquery_control.js');
 module.exports=(app)=>{
     app.post('/enquery/save_enquery',econtroller.addInquery);

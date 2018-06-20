@@ -1,9 +1,16 @@
 const {Student}=require('../models/registration_model.js');
 const {Package}=require('../models/package_model.js');
+const {Session}=require('../models/session_model.js');
 const _=require('lodash');
+var y;
+setInterval(()=>{
+    Session.find().then(function(res) {
+        y=res[0].centre;
+    });
+},2000);
 module.exports={
     addStudent(req,res,next){
-        console.log(req.session.centre);
+        const centren=y;
         var nulla=[];
         var darr=[];
         var someDate = new Date(req.body.registration_date);
@@ -12,7 +19,7 @@ module.exports={
         var std=new Student({
             name:req.body.name,
             mobile:req.body.mobile,
-            centre:req.session.centre,
+            centre:centren,
             alternate_mobile:req.body.alternate_mobile,
             father_name:req.body.father_name,
             father_mobile:req.body.father_mobile,
@@ -21,7 +28,6 @@ module.exports={
             college:req.body.college,
             package_opted:req.body.package_opted,
             individual_courses:req.body.individual_courses,
-            centre:req.session.centre,
             total_fee:req.body.total_fee,
             due_date:darr,
             pay_date:nulla,
@@ -33,7 +39,7 @@ module.exports={
             comments:req.body.comments
         });
         Student.findOne({
-            $and:[{name:req.body.name},{mobile:req.body.mobile},{centre:req.session.centre}]
+            $and:[{mobile:req.body.mobile},{centre:centren}]
         }).then((result)=>{
             if(!result){
                 if(std.package_opted){
@@ -80,9 +86,9 @@ module.exports={
     },
     viewAllDateWise(req,res,next){
         // view all students b/w having registration_date in a range given.
-        var text = fs.readFileSync('./controllers/centre.txt','utf8')
+        const centren=y;
         Student.find({
-            $and:[{centre:req.session.centre},{
+            $and:[{
                 registration_date:{
                     $gte:req.body.ldate
                 }
@@ -91,7 +97,7 @@ module.exports={
                     $lte:req.body.mdate
                 }
             },{
-                centre:req.session.centre
+                centre:centren
             }]
         }).then((result)=>{
             var arr=[];

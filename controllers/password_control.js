@@ -1,5 +1,6 @@
 const express=require('express');
 const {Auth}=require('../models/auth_model.js');
+const {Session}=require('../models/session_model.js');
 module.exports={
 
     checkAuth(req,res,next){
@@ -7,9 +8,15 @@ module.exports={
         query[req.params.centre]=req.body.pwd;
         Auth.findOne(query).then((result)=>{
             if(result){
-                req.session.centre=req.params.centre;
-                req.session.save();
-                res.status(200).send('Auth Successfull');
+                Session.remove().then(()=>{
+                    var sessiond=new Session({
+                        centre:req.params.centre
+                    });
+                    console.log(req.params.centre);
+                    return sessiond.save();
+                }).then(()=>{
+                    res.status(200).send('Auth Successfull');
+                });
             }
             else{
                 res.status(403).send('Password Error');

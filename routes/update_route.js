@@ -1,4 +1,4 @@
-const app=require('../admin.js');
+const {app}=require('../admin.js');
 const control=require('../controllers/update_control.js');
 
 module.exports=(app)=>{

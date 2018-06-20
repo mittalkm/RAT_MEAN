@@ -1,11 +1,19 @@
 const {Student}=require('../models/registration_model.js');
 const _=require('lodash');
+const {Session}=require('../models/session_model.js');
+var y;
+setInterval(()=>{
+    Session.find().then(function(res) {
+        y=res[0].centre;
+    });
+},2000);
 module.exports={
 
     updateFee(req,res,next){
+        const centren=y;
         Student.findOne({
             mobile:req.body.mobile,
-            centre:req.session.centre
+            centre:centren
         }).then((result)=>{
             if(!result){
                 return res.status(418).send('Student Not Found!!!');
@@ -26,14 +34,11 @@ module.exports={
             result.pay_date.push(new Date());
             result.fee_due=nduefee;
             if(result.fee_due==0){
-                /*result.due_date=[];
-                result.pay_date=[];
-                result.total_fee=0;*/
                 result.last_due=null;
             }
             return result;
         }).then((result)=>{
-            return Student.update({mobile:result.mobile,centre:centre},{
+            return Student.update({mobile:result.mobile,centre:centren},{
                 $set:result
             });
         })
@@ -46,12 +51,10 @@ module.exports={
     },
 
     updateStudentCourse(req,res,next){
+        const centren=y;
         Student.find({
-           $or:[{
-               mobile:req.body.mobile
-           },{
-               alternate_mobile:req.body.mobile
-           }],centre:req.session.centre
+            mobile:req.body.mobile,
+            centre:centren
         }).then((result)=>{
             result.individual_courses=result.individual_courses.concat(req.body.courses);
             result.individual_courses=_.uniqWith(result.individual_courses);
