@@ -181,12 +181,9 @@ module.exports={
                 {centre:centren}
             ]}).then((result)=>{
             if(!result){
-                if(!req.body.alternate_mobile){
-                    return res.status(404).send('No Student Have This Mobile No.'); 
-                }
                 Student.findOne({
                     $and:[
-                        {alternate_mobile:req.body.alternate_mobile},
+                        {alternate_mobile:req.body.mobile},
                         {centre:centren}
                     ]}).then((adata)=>{
                         if(!adata){
