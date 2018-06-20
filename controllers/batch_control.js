@@ -177,7 +177,7 @@ module.exports={
         const centren=y;
         var alter_number;
         if(req.body.alternate_number){
-            alter_number=req.body.alternate_number;
+            alter_number=req.body.alternate_mobile;
         }
         Student.findOne({
             $and:[
