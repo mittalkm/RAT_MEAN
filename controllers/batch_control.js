@@ -176,7 +176,7 @@ module.exports={
     getStdMobile(req,res,next){
         const centren=y;
         var alter_number;
-        if(req.body.alternate_number){
+        if(req.body.alternate_mobile){
             alter_number=req.body.alternate_mobile;
         }
         Student.findOne({
