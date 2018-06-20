@@ -18,7 +18,8 @@ module.exports={
             if(obj==null){
                 var crs=new Course({
                     name:req.body.name,
-                    fees:req.body.fees
+                    fees:req.body.fees,
+                    opted:req.body.opted
                 });
                 crs.save().then(()=>{
                     res.send('Course Added Successfully');

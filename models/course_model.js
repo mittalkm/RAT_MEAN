@@ -6,6 +6,9 @@ var Course=mongoose.model('course',{
         trim:true,
         minlength:1
     },
+    opted:{
+        type:Boolean
+    },
     fees:{
         type:Number,
         required:true      
