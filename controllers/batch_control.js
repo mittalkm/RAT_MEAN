@@ -183,7 +183,7 @@ module.exports={
             $and:[
             {mobile:req.body.mobile},
             {centre:centren}
-            ,{alternate_number:alter_number}
+            ,{alternate_mobile:alter_number}
             ]}).then((result)=>{
             if(!result){
                 return res.status(404).send('No Student Have This Mobile No.');
