@@ -175,10 +175,16 @@ module.exports={
 
     getStdMobile(req,res,next){
         const centren=y;
+        var alter_number;
+        if(req.body.alternate_number){
+            alter_number=req.body.alternate_number;
+        }
         Student.findOne({
-            $or:[{mobile:req.body.mobile},{alternate_number:req.body.alternate_number}],
-            centre:centren
-        }).then((result)=>{
+            $and:[
+            {mobile:req.body.mobile},
+            {centre:centren}
+            ,{alternate_number:alter_number}
+            ]}).then((result)=>{
             if(!result){
                 return res.status(404).send('No Student Have This Mobile No.');
             }
