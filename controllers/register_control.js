@@ -45,7 +45,7 @@ module.exports={
             comments:req.body.comments
         });
         Student.findOne({
-            $and:[{mobile:req.body.mobile},{centre:centren}]
+            $and:[{$or:[{mobile:req.body.mobile},{alternate_mobile:req.body.alternate_mobile}]},{centre:centren}]
         }).then((result)=>{
             if(!result){
                 if(std.package_opted){
