@@ -253,6 +253,9 @@ module.exports={
                 vdata=_.pick(item,['name','mobile','email','last_due','fee_due']);
                 data.push(vdata);
             }
+            data.sort(function(a,b){
+                return new Date(a.last_due) - new Date(b.last_due);
+              });
             res.send(data);
         })
         .catch((e)=>{
