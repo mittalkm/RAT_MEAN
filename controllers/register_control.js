@@ -36,6 +36,7 @@ module.exports={
             total_fee:req.body.total_fee,
             due_date:darr,
             pay_date:nulla,
+            pay_details:nulla,
             last_due:someDate,
             registration_date:req.body.registration_date,
             fee_paid:req.body.fee_paid,

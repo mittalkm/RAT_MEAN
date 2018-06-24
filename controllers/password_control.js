@@ -12,7 +12,6 @@ module.exports={
                     var sessiond=new Session({
                         centre:req.params.centre
                     });
-                    console.log(req.params.centre);
                     return sessiond.save();
                 }).then(()=>{
                     res.status(200).send('Auth Successfull');

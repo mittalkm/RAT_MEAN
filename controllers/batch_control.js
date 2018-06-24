@@ -259,6 +259,39 @@ module.exports={
             res.send(404).send(e);
         })
     },
+    
+    getMonthCollection(req,res,next){
+        const centren=y;
+        Student.find({
+             $and:[{pay_date:{
+                 $gte:req.body.sdate
+             }},{pay_date:{
+                $lte:req.body.ldate
+            }},{centre:centren}]   
+        }).then((result)=>{
+            var arr=[];
+            for(let data of result){
+                var obj={};
+                var sum=0;
+                for(let pdate of data.pay_date){
+                    var sdate=new Date(req.body.sdate);
+                    var ldate=new Date(req.body.ldate);
+                    if(pdate.getTime()>=sdate.getTime() && pdate.getTime()<=ldate.getTime()){
+                        var i=data.pay_date.indexOf(pdate);
+                        sum=sum+Number(data.installments[i]);
+                    }
+                }
+                obj.name=data.name;
+                obj.mobile=data.mobile;
+                obj.alternate_mobile=data.alternate_mobile;
+                obj.sum=sum;
+                arr.push(obj);
+            }
+            res.send(arr);
+        }).catch((e)=>{
+            res.status(403).send(e);
+        })
+    },
 
     sendMail(req,res,next){
         var auser="mailbhejo90@gmail.com";

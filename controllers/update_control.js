@@ -17,7 +17,7 @@ module.exports={
     updateFee(req,res,next){
         const centren=y;
         Student.findOne({
-            mobile:req.body.mobile,
+            $or:[{mobile:req.body.mobile},{alternate_mobile:req.body.mobile}],
             centre:centren
         }).then((result)=>{
             if(!result){
@@ -37,8 +37,13 @@ module.exports={
                 result.last_due=result.due_date[result.due_date.length-1];
             }
             result.pay_date.push(new Date());
+            var objd={};
+            objd.installment=req.body.apaid;
+            objd.date=new Date();
+            result.pay_details.push(objd);
             result.fee_due=nduefee;
             if(result.fee_due==0){
+                result.due_date=[];
                 result.last_due=null;
             }
             return result;
@@ -54,31 +59,39 @@ module.exports={
             res.status(404).send(e);
         });
     },
-
+    
     updateStudentCourse(req,res,next){
+        // This will add new course to student opted courses.
         const centren=y;
-        Student.find({
-            mobile:req.body.mobile,
-            centre:centren
+        Student.findOne({
+          $or:[{mobile:req.body.mobile},{alternate_mobile:req.body.mobile}],
+          centre:centren  
         }).then((result)=>{
-            result.individual_courses=result.individual_courses.concat(req.body.courses);
-            result.individual_courses=_.uniqWith(result.individual_courses);
-            result.fee_due=result.fee_due+req.body.fee_due;
-            if(result.last_due==null){
-                var someDate = new Date(req.body.registration_date);
-                var numberOfDaysToAdd = 4;
-                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-                result.last_due=someDate;
+            if(!result){
+                return res.send('No Student Found Having This Mobile Number');
             }
-            return Student.update({
-                mobile:req.body.mobile
-            },{
-                $set:result
-            })
-        }).then((result)=>{
-            res.send('Student details updated successfully.');
+            else{
+                result.individual_courses=_.uniqWith(result.individual_courses.concat(req.body.courses));
+                result.total_fee=result.total_fee+req.body.fee;
+                result.fee_due=result.fee_due+req.body.fee;
+                var someDate;
+                if(result.due_date.length==0){
+                    someDate = new Date();
+                    var numberOfDaysToAdd = 4;
+                    someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+                    result.last_due=someDate;
+                }
+                Student.update({
+                    $or:[{mobile:req.body.mobile},{alternate_mobile:req.body.mobile}],
+                    centre:centren
+                },{
+                    $set:result
+                }).then(()=>{
+                    res.send('Hey ! Registration Successfull...');
+                })
+            }
         }).catch((e)=>{
-            res.status(404).send(e);
+            res.status(403).send(e);
         });
     }
 

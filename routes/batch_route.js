@@ -3,6 +3,7 @@ const control=require('../controllers/batch_control.js');
 module.exports=(app)=>{
     app.post('/email',control.sendMail);
     app.get('/search/duefee',control.getDueStudent);
+    app.post('/student/get_collection',control.getMonthCollection);
     app.post('/search/by_mobile',control.getStdMobile);
     app.post('/search/by_name',control.getStdName);
     app.get('/getall',control.getAllStudent);

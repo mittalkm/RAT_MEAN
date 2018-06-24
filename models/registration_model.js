@@ -43,6 +43,12 @@ const Std=new Schema({
     installments:[{
         type:String
     }],
+    pay_details:[
+        {
+            date:Date,
+            installment:Number
+        }
+    ],
     total_fee:{
         type:Number,
     },
