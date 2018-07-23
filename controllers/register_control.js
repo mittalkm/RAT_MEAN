@@ -114,5 +114,26 @@ module.exports={
         }).catch((e)=>{
             res.status(404).send(e);
         });
+    },
+    //This function will grant modules to students.
+    grantModule(req,res,next){
+        const centren=y;
+        Student.findOne({
+            $or:[{mobile:req.body.mobile},{alternate_mobile:req.body.mobile}],
+            centre:centren
+        }).then((result)=>{
+            if(!result)
+                return res.status(403).send('Student Not Found');
+            result.module_arr=_.uniqWith(result.module_arr.concat(req.body.module_arr));
+            return Student.update({
+                $or:[{mobile:req.body.mobile},{alternate_mobile:req.body.mobile}]
+            },{
+                $set:result
+            })
+        }).then(()=>{
+            res.send('Student info updated successfully');
+        }).catch((e)=>{
+            res.status(404).send(e);
+        })
     }
 }

@@ -8,7 +8,6 @@ const batch_route=require('./routes/batch_route.js');
 const update_route=require('./routes/update_route.js');
 const password_route=require('./routes/password_route.js');
 const bodyParser=require('body-parser');
-const session = require('express-session')
 const app=express();
 const cors=require('cors');
 app.use(cors());

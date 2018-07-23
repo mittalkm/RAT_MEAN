@@ -40,6 +40,10 @@ const Std=new Schema({
         type:String,
         required:true
     },
+    module_arr:[{
+        type:String,
+        default:null
+    }],
     installments:[{
         type:String
     }],
