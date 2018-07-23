@@ -5,6 +5,7 @@ module.exports=(app)=>{
     app.get('/search/duefee',control.getDueStudent);
     app.post('/student/get_collection',control.getMonthCollection);
     app.post('/search/by_mobile',control.getStdMobile);
+    app.post('/search/by_course',control.getBatchByCourse);
     app.post('/search/by_name',control.getStdName);
     app.get('/getall',control.getAllStudent);
     app.post('/search/by_subject',control.getStdSubject);

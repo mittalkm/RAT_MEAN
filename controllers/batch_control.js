@@ -263,6 +263,29 @@ module.exports={
         })
     },
     
+    getBatchByCourse(){
+        const centren=y;
+        Batch.find({
+            course:req.body.subject,
+            centre:centren
+        }).then((result)=>{
+            var arr=[];
+            if(!result){
+                return res.status(403).send('Not Found')
+            }
+            result.sort(function(a,b){
+                return new Date(a.date) - new Date(b.date);
+              });
+            for(var obj of result){
+                arr.push(_.pick(obj,['name']));
+            }
+            res.send(arr);
+        })
+        .catch((e)=>{
+            res.status(404).send(e);
+        })
+    },
+
     getMonthCollection(req,res,next){
         const centren=y;
         Student.find({
