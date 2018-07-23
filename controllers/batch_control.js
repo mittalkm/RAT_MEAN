@@ -263,7 +263,7 @@ module.exports={
         })
     },
     
-    getBatchByCourse(){
+    getBatchByCourse(req,res,next){
         const centren=y;
         Batch.find({
             course:req.body.subject,
