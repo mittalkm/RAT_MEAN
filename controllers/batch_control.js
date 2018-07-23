@@ -276,7 +276,7 @@ module.exports={
             result.sort(function(a,b){
                 return new Date(a.date) - new Date(b.date);
               });
-            for(var obj of result){
+            for(let obj of result){
                 arr.push(_.pick(obj,['name']));
             }
             res.send(arr);
