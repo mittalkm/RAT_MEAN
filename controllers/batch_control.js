@@ -274,7 +274,7 @@ module.exports={
                 return res.status(403).send('Not Found')
             }
             result.sort(function(a,b){
-                return new Date(a.date) - new Date(b.date);
+                return new Date(b.date) - new Date(a.date);
               });
             for(let obj of result){
                 arr.push(_.pick(obj,['name']));
